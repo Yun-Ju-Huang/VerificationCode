@@ -1,6 +1,6 @@
 from flask import Flask,render_template
 import requests
-
+app = Flask(__name__)
 
 # API 的網域位址
 url = 'http://35.206.206.144:8000/photo'
@@ -20,11 +20,9 @@ print(r.status_code)
 print(r.text)
 
 
-# app = Flask(__name__)
-
-# @app.route("/")
-# def hello():
-#     return "Hello, World!"
+@app.route("/")
+def hello():
+    return "Hello, World!"
 
 # # @app.route('/user/<name>')
 # # def user(name):
