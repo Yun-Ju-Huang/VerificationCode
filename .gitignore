@@ -20,4 +20,5 @@ test.py
 test.html
 venv/
 client.py
-
+home.html
+TestImage/
