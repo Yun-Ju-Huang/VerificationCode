@@ -22,3 +22,6 @@ venv/
 client.py
 home.html
 TestImage/
+test2.html
+Loding.html
+__pycache__/
