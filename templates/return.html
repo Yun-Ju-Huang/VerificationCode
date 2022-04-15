@@ -1,129 +1,139 @@
 <body>
   <div class="wrapper">
     <div class="asgardlogo">
-        <img src="https://static.104.com.tw/b_profile/cust_picture/3000/16149963000/logo.gif?v=20220111134550" alt="網站Logo">
-      </div>
+      <img src="https://static.104.com.tw/b_profile/cust_picture/3000/16149963000/logo.gif?v=20220111134550"
+        alt="網站Logo">
+    </div>
     <div class="wrapper2">
-     
+
 
       <div class="title">
-        <img src="https://scontent.ftpe8-4.fna.fbcdn.net/v/t1.18169-1/249684_344197225665386_1137896450_n.png?stp=c24.24.296.296a_dst-png&_nc_cat=102&ccb=1-5&_nc_sid=1eb0c7&_nc_ohc=uCb_3qj_kagAX9kIXM1&_nc_ht=scontent.ftpe8-4.fna&oh=00_AT_RXxWfcPrGSqq4fCDeuTb8vCwCpzehgBDNZPvxn0k8cA&oe=627BA20B" alt="網站Logo">
+        <img
+          src="https://scontent.ftpe8-4.fna.fbcdn.net/v/t1.18169-1/249684_344197225665386_1137896450_n.png?stp=c24.24.296.296a_dst-png&_nc_cat=102&ccb=1-5&_nc_sid=1eb0c7&_nc_ohc=uCb_3qj_kagAX9kIXM1&_nc_ht=scontent.ftpe8-4.fna&oh=00_AT_RXxWfcPrGSqq4fCDeuTb8vCwCpzehgBDNZPvxn0k8cA&oe=627BA20B"
+          alt="網站Logo">
         <h2>圖片回傳值</h2>
       </div>
 
       <form id="login-form" class="text-left" method='GET' action="/">
-      <div class="uploadimage">
-        <input type="text" value={{answer}}>
-      </div>
-      <div class="commit">
-        <p type="text">感謝您的使用，需再次上傳請點選“再次上傳”紐，謝謝。</p>
-      </div>
-      <div class="upload">
-        <button type="submit" title="再次上傳"> 再次上傳</button>
-      </div>
-    </form>
+        <div class="uploadimage">
+          <p type="text" >{{answer}}</p>
+          <!-- <input type="text">{{answer}} -->
+        </div>
+        <div class="commit">
+          <p type="text">感謝您的使用，需再次上傳請點選“再次上傳”紐，謝謝。</p>
+        </div>
+        <div class="upload">
+          <button type="submit" title="再次上傳"> 再次上傳</button>
+        </div>
+      </form>
     </div>
   </div>
   <style>
-  body {
-  background-color: #ecf5ff;
-  box-sizing: broder-box;
-}
-.wrapper {
-  padding: 10px 10px;
-  box-sizing: border-box;
-  border-radius: 10px;
-  border: 4px solid white;
-  background-color: white;
-  border-radius: 4px;
-  max-width: 800px;
-  margin: 0 auto;
-}
+    body {
+      background-color: #ecf5ff;
+      box-sizing: broder-box;
+    }
 
-.asgardlogo img{
-  width: 183px;
-  height: 55px;
-}
-.wrapper2{
-  padding: 10px 70px;
-  box-sizing: border-box;
-  border-radius: 10px;
-  border: 4px solid white;
-  background-color: white;
-  border-radius: 4px;
-  max-width: 800px;
-  margin: 0 auto;
-}
+    .wrapper {
+      padding: 10px 10px;
+      box-sizing: border-box;
+      border-radius: 10px;
+      border: 4px solid white;
+      background-color: white;
+      border-radius: 4px;
+      max-width: 800px;
+      margin: 0 auto;
+    }
 
-.title {
-  display: flex;
-  justify-content: flex-start;
-}
-.title img {
-  width: 60px;
-  height: 60px;
-}
-h2 {
-  color: #0080FF;
-  height: 60px;
-}
+    .asgardlogo img {
+      width: 183px;
+      height: 55px;
+    }
 
-.uploadimage {
-  display: flex;
-  justify-content: space-around;
-}
+    .wrapper2 {
+      padding: 10px 70px;
+      box-sizing: border-box;
+      border-radius: 10px;
+      border: 4px solid white;
+      background-color: white;
+      border-radius: 4px;
+      max-width: 800px;
+      margin: 0 auto;
+    }
 
-.uploadimage [type="text"] {
-  padding: 4px 4px;
-  width: 500px;
-  height: 150px;
-  box-sizing: border-box;
-  border-radius: 10px;
-  border: 4px solid #00adeb;
-  border-radius: 15px;
-}
+    .title {
+      display: flex;
+      justify-content: flex-start;
+    }
 
-.uploadimage [type="submit"] {
-  background-color: white;
-  color: #000066;
-  border: 3px solid #00adeb;
-  margin: 0px 20px;
-  border-radius: 4px;
-}
+    .title img {
+      width: 60px;
+      height: 60px;
+    }
 
-.uploadimage [type="submit"]:hover {
-  background-color: #00adeb;
-  color: white;
-}
+    h2 {
+      color: #0080FF;
+      height: 60px;
+    }
 
-.upload {
-  display: flex;
-  justify-content: center;
-}
+    .uploadimage {
+      display: flex;
+      justify-content: space-around;
+    }
 
-.commit [type="text" ] {
-  font-size:15px;
-  color:#0080FF	;
-  display: flex;
-  justify-content: center;
-}
+    .uploadimage [type="text"] {
+      padding: 4px 4px;
+      width: 500px;
+      height: 150px;
+      box-sizing: border-box;
+      border-radius: 10px;
+      border: 4px solid #00adeb;
+      border-radius: 15px;
+      display: flex;  
+      justify-content: center;
+      align-items: center;
+      font-size: 50px;
+      color: #0080ff
+    }
+
+    .uploadimage [type="submit"] {
+      background-color: white;
+      color: #000066;
+      border: 3px solid #00adeb;
+      margin: 0px 20px;
+      border-radius: 4px;
+    }
+
+    .uploadimage [type="submit"]:hover {
+      background-color: #00adeb;
+      color: white;
+    }
+
+    .upload {
+      display: flex;
+      justify-content: center;
+    }
+
+    .commit [type="text"] {
+      font-size: 15px;
+      color: #0080FF;
+      display: flex;
+      justify-content: center;
+    }
 
 
 
-.upload [type="submit"] {
-  background-color: white;
-  color: #000066;
-  border-radius: 4px;
-  border: 3px solid #00adeb;
-  margin: 0 auto;
-}
+    .upload [type="submit"] {
+      background-color: white;
+      color: #000066;
+      border-radius: 4px;
+      border: 3px solid #00adeb;
+      margin: 0 auto;
+    }
 
-.upload [type="submit"]:hover {
-  background-color: #00adeb;
-  color: white;
-}
-
-  
-  
+    .upload [type="submit"]:hover {
+      background-color: #00adeb;
+      color: white;
+    }
   </style>
 </body>

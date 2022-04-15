@@ -2,6 +2,171 @@
 
 <body>
 
+  <head>
+
+    <style>
+      body {
+        background-color: #ecf5ff;
+        box-sizing: broder-box;
+      }
+
+      .wrapper {
+        padding: 10px 10px;
+        box-sizing: border-box;
+        border-radius: 10px;
+        border: 4px solid white;
+        background-color: white;
+        border-radius: 4px;
+        max-width: 800px;
+        margin: 0 auto;
+      }
+
+      .wrapper2 {
+        padding: 10px 70px;
+        box-sizing: border-box;
+        border-radius: 10px;
+        border: 4px solid white;
+        background-color: white;
+        border-radius: 4px;
+        max-width: 800px;
+        margin: 0 auto;
+      }
+
+      .title {
+        display: flex;
+        justify-content: flex-start;
+      }
+
+      .title img {
+        width: 60px;
+        height: 60px;
+      }
+
+      h2 {
+        color: #0080FF;
+        height: 60px;
+      }
+
+      .uploadimage {
+        display: flex;
+        justify-content: space-around;
+
+      }
+
+      .uploadimage [type="msee"] {
+        font-size: 15px;
+        color: red;
+        display: flex;
+        justify-content: center;
+      }
+
+      .uploadimage [type="text"] {
+        padding: 4px 4px;
+        width: 500px;
+        height: 50px;
+        box-sizing: border-box;
+        border-radius: 10px;
+        border: 4px solid #00adeb;
+        border-radius: 15px;
+      }
+
+      .uploadimage [type="submit"] {
+        background-color: white;
+        color: #000066;
+        border: 3px solid #00adeb;
+        margin: 0px 10px;
+        border-radius: 4px;
+      }
+
+      .uploadimage [type="submit"]:hover {
+        background-color: #00adeb;
+        color: white;
+      }
+
+      .upload {
+        display: flex;
+        justify-content: center;
+      }
+
+      .commit [type="text"] {
+        font-size: 15px;
+        color: #0080FF;
+        display: flex;
+        justify-content: center;
+      }
+
+      .upload [type="submit"] {
+        background-color: white;
+        color: #000066;
+        border-radius: 4px;
+        border: 3px solid #00adeb;
+        margin: 0 auto;
+      }
+
+      .upload [type="submit"]:hover {
+        background-color: #00adeb;
+        color: white;
+      }
+
+      .loading {
+        position: absolute;
+        z-index: 9999;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        display: none;
+      }
+
+      .loading .mask {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background-color: #444;
+        opacity: 0.5;
+      }
+
+      .wrapper3 {
+        display: flex;
+        height: 300px;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .loader {
+        border: 16px solid #f3f3f3;
+        border-radius: 50%;
+        border-top: 16px solid #3498db;
+        width: 120px;
+        height: 120px;
+        -webkit-animation: spin 2s linear infinite;
+        /* Safari */
+        animation: spin 2s linear infinite;
+
+      }
+
+      /* Safari */
+      @-webkit-keyframes spin {
+        0% {
+          -webkit-transform: rotate(0deg);
+        }
+
+        100% {
+          -webkit-transform: rotate(360deg);
+        }
+      }
+
+      @keyframes spin {
+        0% {
+          transform: rotate(0deg);
+        }
+
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+    </style>
+  </head>
   <div class="wrapper">
 
     <div class="asgardlogo">
@@ -15,11 +180,8 @@
           alt="網站Logo">
         <h2>請上傳驗證碼</h2>
       </div>
-      <!-- <form id="login-form" class="text-left" method='post' action=/return> -->
       <form id="login-form" class="text-left" method='post' action=/return>
-
         <div class="uploadimage">
-
           <input type="text" id="path" name="path" placeholder="path">
           <button type="submit" value="選擇圖片" title="prwview">選擇圖片</button>
         </div>
@@ -28,215 +190,40 @@
           <p type="text">※注意一次一張圖片，謝謝。</p>
         </div>
         <div class="upload">
-          <!-- <input type="submit" title="上傳" value="上傳"> -->
-          <button type="submit" onclick="loadingBeforeResponse()">上傳</button>
+          <button type="submit" id='btnTest'>上傳</button>
         </div>
       </form>
-      <div class="form-group" id="process" style="display:none;">
-        <div class="progress">
-          <div class="progress-bar progress-bar-striped active bg-success" role="progressbar" aria-valuemin="0"
-            aria-valuemax="100" style="width: 0%"></div>
+      <div class="loading">
+        <div class="mask"></div>
+        <div class="wrapper3">
+          <div class="loader"></div>
+          <div class="animation"></div>
         </div>
       </div>
-
-      <!-- <div class="form-group" id="process" style="display:none;"> -->
-      <!-- <div class="loading">
-        <div class="mask"></div>
-        <div class="loader"></div>
-        <div class="animation"> -->
-
-      <!-- <div class="progress-bar progress-bar-striped active bg-success" role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width: 0%"></div> -->
-
     </div>
   </div>
   </div>
   </div>
   </div>
+  <script>
+    function toggleLoading(show) {
+      document.querySelector('.loading').style.display = show ? 'block' : 'none';
+    }
+    function callAjax() {
+      var req = new XMLHttpRequest();
+      console.log(req.status);
+      req.addEventListener("load", function () {
+        toggleLoading(false);
+      });
+      req.addEventListener("error", function () {
+        alert("ERROR");
+        toggleLoading(false);
+      });
+      toggleLoading(true);
+    }
+    document.getElementById('btnTest')
+      .addEventListener('click', callAjax);
+  </script>
 </body>
 
 </html>
-
-
-<!-- <script>
-  function toggleLoading(show) {
-    document.querySelector('.loading').style.display = show ? 'block' : 'none';
-  }
-  function callAjax() {
-    var req = new XMLHttpRequest();
-    req.addEventListener("load", function () {
-      toggleLoading(false);
-      if (req.status == 200)
-        document.getElementById('txtResult').innerText = req.responseText;
-      else {
-        alert("XHR Status=" + req.status);
-      }
-    });
-    req.addEventListener("error", function () {
-      //failed to get response from remote server
-      alert("ERROR");
-      toggleLoading(false);
-    });
-    var act = document.getElementById('uploadimage').value;
-    if (act == "D") {
-      req.open("POST", "http://no-such-host.net/null.html");
-    }
-    else if (act == "N") {
-      req.open("POST", "no-such-page.aspx");
-    }
-    else {
-      req.open("POST", "getGuid.aspx?d=" + act);
-    }
-    toggleLoading(true);
-    document.getElementById('txtResult').innerText = "";
-    req.send();
-  }
-  document.getElementById('submit')
-    .addEventListener('click', callAjax);
-</script> -->
-<!-- <script> -->
-
-<!-- // function loadingBeforeResponse(res) {
-// document.getElementById("loadber").style.display = "true";
-// if (res) { document.getElementById("loader").style.display = "none"; }
-// } -->
-<!-- </script> -->
-
-
-<style>
-  body {
-    background-color: #ecf5ff;
-    box-sizing: broder-box;
-  }
-
-  .wrapper {
-    padding: 10px 10px;
-    box-sizing: border-box;
-    border-radius: 10px;
-    border: 4px solid white;
-    background-color: white;
-    border-radius: 4px;
-    max-width: 800px;
-    margin: 0 auto;
-  }
-
-  .wrapper2 {
-    padding: 10px 70px;
-    box-sizing: border-box;
-    border-radius: 10px;
-    border: 4px solid white;
-    background-color: white;
-    border-radius: 4px;
-    max-width: 800px;
-    margin: 0 auto;
-  }
-
-  .title {
-    display: flex;
-    justify-content: flex-start;
-  }
-
-  .title img {
-    width: 60px;
-    height: 60px;
-  }
-
-  h2 {
-    color: #0080FF;
-    height: 60px;
-  }
-
-  .uploadimage {
-    display: flex;
-    justify-content: space-around;
-
-  }
-
-  .uploadimage [type="msee"] {
-    font-size: 15px;
-    color: red;
-    display: flex;
-    justify-content: center;
-  }
-
-  .uploadimage [type="text"] {
-    padding: 4px 4px;
-    width: 500px;
-    height: 50px;
-    box-sizing: border-box;
-    border-radius: 10px;
-    border: 4px solid #00adeb;
-    border-radius: 15px;
-  }
-
-  .uploadimage [type="submit"] {
-    background-color: white;
-    color: #000066;
-    border: 3px solid #00adeb;
-    margin: 0px 10px;
-    border-radius: 4px;
-  }
-
-  .uploadimage [type="submit"]:hover {
-    background-color: #00adeb;
-    color: white;
-  }
-
-  .upload {
-    display: flex;
-    justify-content: center;
-  }
-
-  .commit [type="text"] {
-    font-size: 15px;
-    color: #0080FF;
-    display: flex;
-    justify-content: center;
-  }
-
-
-
-  .upload [type="submit"] {
-    background-color: white;
-    color: #000066;
-    border-radius: 4px;
-    border: 3px solid #00adeb;
-    margin: 0 auto;
-  }
-
-  .upload [type="submit"]:hover {
-    background-color: #00adeb;
-    color: white;
-  }
-
-  /* .loader {
-    border: 16px solid #f3f3f3;
-    border-radius: 50%;
-    border-top: 16px solid #3498db;
-    width: 120px;
-    height: 120px;
-    -webkit-animation: spin 2s linear infinite;
-    /* Safari */
-  /* animation: spin 2s linear infinite;
-  } */
-
-  /* Safari */
-  /* @-webkit-keyframes spin {
-    0% {
-      -webkit-transform: rotate(0deg);
-    }
-
-    100% {
-      -webkit-transform: rotate(360deg);
-    }
-  }
-
-  @keyframes spin {
-    0% {
-      transform: rotate(0deg);
-    }
-
-    100% {
-      transform: rotate(360deg);
-    }
-  } */
-</style>
