@@ -55,7 +55,7 @@ def upload():
         fileName = str(fileName[1])        
         # print(fileName)
         if fileName == "":
-            path = (request.form['path']).lstrip        
+            path = request.form['path']    
             file_name = path.split('\\')[-1]
             file = open(path,'rb')
             files = {'file':(file_name, file, 'image/jpg/png')}
