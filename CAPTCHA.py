@@ -30,21 +30,28 @@ configure_uploads(app, photos)
 a=pathlib.Path(__file__).parent.absolute()  
 
 
-#執行上傳檔案頁面
+#執行上傳檔案頁面( upload.html)
 @app.route('/')
 def home():
-    shutil.rmtree(f'{a}/static/img/')#刪除img中的檔案
-    os.mkdir(f'{a}/static/img/')   #建立img資料夾        
-    return render_template('upload.html') 
+    #刪除img中的檔案
+    shutil.rmtree(f'{a}/static/img/')
+    #建立img資料夾     
+    os.mkdir(f'{a}/static/img/')           
+    return render_template('upload.html')   # 執行 upload.html
 
 @app.route("/return", methods=['GET', 'POST'])
 def upload():
-    if request.method == 'GET': 
-        shutil.rmtree(f'{a}/static/img/')#刪除img中的檔案
-        os.mkdir(f'{a}/static/img/')   #建立img資料夾    
-        return redirect(url_for("home"))    
-    if request.method == 'POST'  and 'photo' in request.files and request.form['path'] != "":      
+    if request.method == 'GET':     #判斷若method=GET，此處用於當user點"再次上傳"時
+        #刪除img中的檔案
+        shutil.rmtree(f'{a}/static/img/')
+        #建立img資料夾
+        os.mkdir(f'{a}/static/img/')       
+        return redirect(url_for("home"))    # 執行home function
+
+    if request.method == 'POST'  and 'photo' in request.files and request.form['path'] != "":      #判斷若method=POST，此處用於使用者輸入完檔案路徑或選擇完檔案
+        
         fileName = str(request.files['photo']).replace(">", "").replace("<","").replace("FileStorage: ","").replace("(", "").replace(")","").split("'")
+        # 拿到上傳的檔案名稱
         fileName = str(fileName[1])        
         # print(fileName)
         if fileName == "":
@@ -62,8 +69,7 @@ def upload():
                 answer = message[answer]
             return render_template('return.html',answer=answer)
         else:
-            photos.save(request.files['photo'])
-          
+            photos.save(request.files['photo'])          
             file_path = (f'{a}/static/img/{fileName}').replace("\\","/")
             file_name = file_path.split('/')[-1]
             # print(file_name)
@@ -82,7 +88,6 @@ def upload():
     
 
 
-
-# 
+ 
 if __name__ == '__main__':
-    app.run(debug="True")
+    app.run()
