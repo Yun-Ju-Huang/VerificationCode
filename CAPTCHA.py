@@ -50,13 +50,12 @@ def upload():
 
     if request.method == 'POST'  and 'photo' in request.files and request.form['path'] != "":      #判斷若method=POST，此處用於使用者輸入完檔案路徑或選擇完檔案
         
-        fileName = str(request.files['photo']).replace(">", "").replace("<","").replace("FileStorage: ","").replace("(", "").replace(")","").split("'")
+        fileName = str(request.files['photo']).replace(">", "").replace("<","").replace("FileStoㄔㄛˉrage: ","").replace("(", "").replace(")","").split("'")
         # 拿到上傳的檔案名稱
         fileName = str(fileName[1])        
         # print(fileName)
         if fileName == "":
-            path = request.form['path']
-            # print(path)            
+            path = (request.form['path']).lstrip        
             file_name = path.split('\\')[-1]
             file = open(path,'rb')
             files = {'file':(file_name, file, 'image/jpg/png')}
