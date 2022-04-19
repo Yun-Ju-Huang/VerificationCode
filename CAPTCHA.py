@@ -6,6 +6,16 @@ import shutil
 import os
 # # API 的網域位址
 url = 'http://35.206.206.144:8000/photo'
+#error message
+message={"DB_ConnectError":"錯誤:DB_ConnectError",
+"Content_Unrecognizable":"錯誤:內容無法識別",
+"Authorization_Error":"錯誤:授權好像停止了，請洽宏燁資訊業務詢問",
+"AuthorizationIP_Error":"錯誤:IP未授權，請洽宏燁資訊業務詢問",
+"FileTypes_Error":"錯誤:檔案不符合類型",
+"Content_Nnrecognizable":"錯誤:檔案無法解析",
+"API_connectError":"錯誤:連線異常，請洽宏燁資訊"}
+
+
 
 
 # 起首式(flask 基本起首是)
@@ -48,6 +58,8 @@ def upload():
             print(asn.status_code)
             print(asn.text)
             answer =asn.text
+            if (answer in message.keys()) == True:
+                answer = message[answer]
             return render_template('return.html',answer=answer)
         else:
             photos.save(request.files['photo'])
@@ -61,6 +73,8 @@ def upload():
             print(r.status_code)
             print(r.text)            
             answer = r.text
+            if (answer in message.keys()) == True:
+                answer = message[answer]
             return render_template('return.html',answer=answer)
     elif request.form['path'] == "":
         return redirect(url_for("home"))  
