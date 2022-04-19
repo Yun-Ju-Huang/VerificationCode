@@ -17,6 +17,7 @@
 
 # 忽略test.py
 test.py
+test2.py
 test.html
 venv/
 client.py

@@ -2,7 +2,8 @@
 
 <body>
 
-  <head>
+  <head>    
+      <title>宏燁資訊</title> 
 
     <style>
       body {
@@ -70,6 +71,7 @@
         border-radius: 15px;
       }
 
+      /* 
       .uploadimage [type="submit"] {
         background-color: white;
         color: #000066;
@@ -81,7 +83,7 @@
       .uploadimage [type="submit"]:hover {
         background-color: #00adeb;
         color: white;
-      }
+      } */
 
       .upload {
         display: flex;
@@ -104,6 +106,34 @@
       }
 
       .upload [type="submit"]:hover {
+        background-color: #00adeb;
+        color: white;
+      }
+
+      input[type="file"] {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        border: 0;
+      }
+
+      .custom-file-upload {
+        border: 1px solid #ccc;
+        display: inline-block;
+        padding: 6px 12px;
+        cursor: pointer;
+        background-color: white;
+        color: #000066;
+        border-radius: 4px;
+        border: 3px solid #00adeb;
+        margin: 0 auto;
+      }
+
+      .custom-file-upload:hover {
         background-color: #00adeb;
         color: white;
       }
@@ -180,10 +210,17 @@
           alt="網站Logo">
         <h2>請上傳驗證碼</h2>
       </div>
-      <form id="login-form" class="text-left" method='post' action=/return>
+      <form id="login-form" enctype=multipart/form-data class="text-left" method='POST' action="/return">
         <div class="uploadimage">
-          <input type="text" id="path" name="path" >
-          <button type="submit" value="選擇圖片" title="prwview">選擇圖片</button>
+          <input type="text" id="path" name="path" value="">
+          <!-- <button type="submit" value="選擇圖片" title="prwview">選擇圖片</button> -->
+          <label for="file-upload" class="custom-file-upload">
+            <i class="fa fa-cloud-upload"></i> 選擇圖片
+          </label>
+          <input id="file-upload" type="file" name="photo" />
+
+          <p id="feedback"></p>
+
         </div>
         <div class="commit">
           <p type="text">※只支援".jpg"、".png"、".jpeg"案格式。</p>
@@ -206,6 +243,15 @@
   </div>
   </div>
   <script>
+    //顯示檔名
+    const fileUploader = document.getElementById('file-upload');
+    fileUploader.addEventListener('change', (event) => {
+      const files = event.target.files;
+      // console.log('files', files);     
+      const msg = files[0].name;
+      document.getElementById('path').value = msg;
+    });
+    //Loading 頁面遮罩
     function toggleLoading(show) {
       document.querySelector('.loading').style.display = show ? 'block' : 'none';
     }
