@@ -27,3 +27,7 @@ test2.html
 Loding.html
 __pycache__/
 test3.html
+# 不可傳
+captcha_json.py
+captcha_RUN.py
+captcha_TwoCaptcha.py

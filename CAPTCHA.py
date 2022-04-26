@@ -6,16 +6,6 @@ import shutil
 import os
 # # API 的網域位址
 url = 'http://35.206.206.144:8000/photo'
-#error message
-message={"DB_ConnectError":"錯誤:DB_ConnectError",
-"Content_Unrecognizable":"錯誤:內容無法識別",
-"Authorization_Error":"錯誤:授權好像停止了，請洽宏燁資訊業務詢問",
-"AuthorizationIP_Error":"錯誤:IP未授權，請洽宏燁資訊業務詢問",
-"FileTypes_Error":"錯誤:檔案不符合類型",
-"Content_Nnrecognizable":"錯誤:檔案無法解析",
-"API_connectError":"錯誤:連線異常，請洽宏燁資訊"}
-
-
 
 
 # 起首式(flask 基本起首是)
@@ -30,32 +20,26 @@ configure_uploads(app, photos)
 a=pathlib.Path(__file__).parent.absolute()  
 
 
-#執行上傳檔案頁面( upload.html)
+#執行上傳檔案頁面
 @app.route('/')
 def home():
-    #刪除img中的檔案
-    shutil.rmtree(f'{a}/static/img/')
-    #建立img資料夾     
-    os.mkdir(f'{a}/static/img/')           
-    return render_template('upload.html')   # 執行 upload.html
+    shutil.rmtree(f'{a}/static/img/')#刪除img中的檔案
+    os.mkdir(f'{a}/static/img/')   #建立img資料夾        
+    return render_template('upload.html') 
 
 @app.route("/return", methods=['GET', 'POST'])
 def upload():
-    if request.method == 'GET':     #判斷若method=GET，此處用於當user點"再次上傳"時
-        #刪除img中的檔案
-        shutil.rmtree(f'{a}/static/img/')
-        #建立img資料夾
-        os.mkdir(f'{a}/static/img/')       
-        return redirect(url_for("home"))    # 執行home function
-
-    if request.method == 'POST'  and 'photo' in request.files and request.form['path'] != "":      #判斷若method=POST，此處用於使用者輸入完檔案路徑或選擇完檔案
-        
-        fileName = str(request.files['photo']).replace(">", "").replace("<","").replace("FileStoㄔㄛˉrage: ","").replace("(", "").replace(")","").split("'")
-        # 拿到上傳的檔案名稱
+    if request.method == 'GET': 
+        shutil.rmtree(f'{a}/static/img/')#刪除img中的檔案
+        os.mkdir(f'{a}/static/img/')   #建立img資料夾    
+        return redirect(url_for("home"))    
+    if request.method == 'POST'  and 'photo' in request.files and request.form['path'] != "":      
+        fileName = str(request.files['photo']).replace(">", "").replace("<","").replace("FileStorage: ","").replace("(", "").replace(")","").split("'")
         fileName = str(fileName[1])        
         # print(fileName)
         if fileName == "":
-            path = request.form['path']    
+            path = request.form['path']
+            # print(path)            
             file_name = path.split('\\')[-1]
             file = open(path,'rb')
             files = {'file':(file_name, file, 'image/jpg/png')}
@@ -64,11 +48,10 @@ def upload():
             print(asn.status_code)
             print(asn.text)
             answer =asn.text
-            if (answer in message.keys()) == True:
-                answer = message[answer]
             return render_template('return.html',answer=answer)
         else:
-            photos.save(request.files['photo'])          
+            photos.save(request.files['photo'])
+          
             file_path = (f'{a}/static/img/{fileName}').replace("\\","/")
             file_name = file_path.split('/')[-1]
             # print(file_name)
@@ -78,8 +61,6 @@ def upload():
             print(r.status_code)
             print(r.text)            
             answer = r.text
-            if (answer in message.keys()) == True:
-                answer = message[answer]
             return render_template('return.html',answer=answer)
     elif request.form['path'] == "":
         return redirect(url_for("home"))  
@@ -87,6 +68,7 @@ def upload():
     
 
 
- 
+
+# 
 if __name__ == '__main__':
-    app.run()
+    app.run(debug="True")
